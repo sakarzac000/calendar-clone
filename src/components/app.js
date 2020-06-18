@@ -6,7 +6,7 @@ import Content from "./content/content"
 
 const data = [
   {
-    id: 4,
+    id: 0,
     month: "May",
     daysInMonth: 31,
     daysInPreviousMonth: 30,
@@ -14,7 +14,7 @@ const data = [
     year: 2020
   },
   { 
-    id: 5,
+    id: 1,
     month: "June",
     daysInMonth: 30,
     daysInPreviousMonth: 31,
@@ -22,7 +22,7 @@ const data = [
     year: 2020
   },
   {
-    id: 6,
+    id: 2,
     month: "July",
     daysInMonth: 31,
     daysInPreviousMonth: 30,
@@ -43,6 +43,8 @@ export default class App extends Component {
       startDay: "", 
       year: ""
     }
+
+    this.handleMonthChange = this.handleMonthChange.bind(this)
   }
 
   componentDidMount() {
@@ -58,10 +60,26 @@ export default class App extends Component {
     })
   }
 
+  handleMonthChange(direction) {
+    const month = direction === "+"
+                  ? data[this.state.id + 1]
+                  : data[this.state.id - 1]
+
+    this.setState({
+      id: month.id,
+      month: month.month,
+      daysInMonth: month.daysInMonth,
+      daysInPreviousMonth: month.daysInPreviousMonth,
+      startDay: month.startDay,
+      year: month.year
+    })      
+
+  }
+
   render() {
     return (
       <div className='app'>
-        <Header month={this.state.month} />
+        <Header month={this.state.month} handleMonthChange={this.handleMonthChange}/>
         <Content 
         daysInMonth={this.state.daysInMonth} 
         daysInPreviousMonth={this.state.daysInPreviousMonth}
