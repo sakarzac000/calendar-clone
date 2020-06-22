@@ -7,7 +7,11 @@ export default function ContentWrapper(props) {
     return (
         <div className="content-wrapper">
             <DaysWrapper />
-            <CalendarBoxesWrapper />
+            <CalendarBoxesWrapper 
+            daysInMonth={props.daysInMonth}
+            daysInPreviousMonth={props.daysInPreviousMonth}
+            startDay={props.startDay}
+            />
         </div>
     )
 }
